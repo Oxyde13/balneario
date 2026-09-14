@@ -35,7 +35,7 @@ export function HomePage() {
         )}
       </div>
       <TodayBirthdays />
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         <MonthBirthdaysCard />
         <MonthCakesCard />
         <TopDodgerCard />
@@ -52,11 +52,11 @@ function CardTitle({ children, to, action }: { children: ReactNode; to?: string;
   const { t } = useTranslation();
   return (
     <div className="mb-3 flex items-center justify-between gap-2">
-      <h2 className="text-lg font-extrabold">{children}</h2>
-      <div className="flex items-center gap-1">
+      <h2 className="min-w-0 text-lg font-extrabold">{children}</h2>
+      <div className="flex shrink-0 items-center gap-1">
         {action}
         {to && (
-          <Link to={to} className="flex min-h-touch items-center text-sm font-semibold text-link" aria-label={t('common:actions.seeAll')}>
+          <Link to={to} className="flex min-h-touch items-center whitespace-nowrap text-sm font-semibold text-link" aria-label={t('common:actions.seeAll')}>
             {t('common:actions.seeAll')}
             <ChevronRightIcon className="h-4 w-4" />
           </Link>

@@ -38,7 +38,7 @@ export function StylishView({
             <span className="min-w-0 flex-1">
               <span className="block truncate font-bold">{member?.name ?? '—'}</span>
               <span className="block truncate text-sm text-muted-foreground">{formatMonthYear(award.period_start, fmt.lng)}</span>
-              {award.comment && <span className="block truncate text-sm italic text-muted-foreground">“{award.comment}”</span>}
+              {award.comment && <span className="block break-words text-sm italic text-muted-foreground">“{award.comment}”</span>}
             </span>
           </li>
         );

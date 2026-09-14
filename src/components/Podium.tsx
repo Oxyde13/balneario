@@ -26,7 +26,7 @@ export function Podium({ entries, label }: { entries: PodiumEntry[]; label: stri
         if (!entry) return <li key={index} aria-hidden="true" style={{ order: ORDER.indexOf(index) }} />;
         return (
           <li key={entry.member.member_id} className="flex min-w-0 flex-col items-center text-center" style={{ order: ORDER.indexOf(index) }}>
-            <Link to={`/team/${entry.member.member_id}`} className="flex min-w-0 flex-col items-center rounded-xl p-1 hover:bg-muted">
+            <Link to={`/team/${entry.member.member_id}`} className="flex w-full min-w-0 flex-col items-center rounded-xl p-1 hover:bg-muted">
               <Avatar name={entry.member.name} photoPath={entry.member.photo_path} size={index === 0 ? 'lg' : 'md'} />
               <span className="mt-1 w-full truncate text-sm font-bold">{shortName(entry.member)}</span>
               <TypeBadge member={entry.member} />
