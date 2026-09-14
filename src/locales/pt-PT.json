@@ -1,0 +1,699 @@
+{
+  "common": {
+    "appName": "Balneário 1º de Maio",
+    "appShortName": "Balneário",
+    "clubTagline": "CD 1º de Maio · Desde 1925",
+    "skipToContent": "Saltar para o conteúdo",
+    "optional": "opcional",
+    "yes": "Sim",
+    "no": "Não",
+    "nav": {
+      "label": "Navegação principal",
+      "home": "Início",
+      "birthdays": "Aniversários",
+      "fines": "Multas",
+      "rankings": "Rankings",
+      "rules": "Regulamento",
+      "team": "Equipa",
+      "dinners": "Jantares",
+      "admin": "Administração",
+      "more": "Mais",
+      "logout": "Sair"
+    },
+    "actions": {
+      "seeAll": "Ver tudo",
+      "retry": "Tentar outra vez",
+      "close": "Fechar",
+      "cancel": "Cancelar",
+      "save": "Guardar",
+      "edit": "Editar",
+      "delete": "Apagar",
+      "continue": "Continuar",
+      "back": "Voltar",
+      "clear": "Limpar",
+      "loadMore": "Carregar mais"
+    },
+    "states": {
+      "loading": "A carregar…",
+      "error": "Algo correu mal."
+    },
+    "language": {
+      "label": "Idioma",
+      "pt": "Português",
+      "en": "Inglês"
+    },
+    "memberType": {
+      "player": "Jogador",
+      "coach": "Treinador",
+      "staff": "Staff"
+    },
+    "memberTypePlural": {
+      "player": "jogadores",
+      "coach": "treinadores",
+      "staff": "staff"
+    },
+    "filterType": {
+      "players": "Jogadores",
+      "staff": "Equipa técnica"
+    },
+    "dbErrors": {
+      "FINE_LOCKED": "Esta multa já foi paga e o dinheiro já foi gasto no jantar. Não pode ser alterada.",
+      "PAYMENT_BEFORE_DINNER": "A data de pagamento tem de ser posterior ao último jantar registado.",
+      "DINNER_IMMUTABLE": "A data e o valor do jantar já não podem ser alterados.",
+      "DINNER_NOT_LATEST": "Só é possível anular o registo do jantar mais recente.",
+      "DINNER_BEFORE_PREVIOUS": "O jantar tem de ser depois do jantar anterior.",
+      "CAKE_HAS_AWARD": "Este bolo está no pódio. Retira-o dos prémios primeiro.",
+      "AWARD_CAKE_NOT_BROUGHT": "Só podem ser premiados bolos que já foram trazidos.",
+      "AWARD_CAKE_NOT_FOUND": "Bolo não encontrado.",
+      "AWARD_MEMBER_INACTIVE": "Só membros ativos podem ser premiados.",
+      "AWARD_MEMBER_NOT_FOUND": "Membro não encontrado.",
+      "MEMBER_DELETE_FORBIDDEN": "Os membros nunca são apagados. Desativa-o em vez disso.",
+      "NOT_ADMIN": "Só o administrador pode fazer isto.",
+      "duplicate": "Já existe um registo igual.",
+      "forbidden": "Sem permissão para esta operação.",
+      "network": "Sem ligação. Verifica a internet e tenta outra vez.",
+      "generic": "Ocorreu um erro inesperado. Tenta outra vez."
+    },
+    "notFound": {
+      "title": "Bola fora!",
+      "text": "Esta página não existe. Volta ao relvado."
+    }
+  },
+  "auth": {
+    "subtitle": "Aniversários, bolos e multas do plantel",
+    "profile": {
+      "label": "Perfil",
+      "team": "Equipa",
+      "admin": "Administrador"
+    },
+    "pinLabel": "PIN",
+    "pinHint": "6 dígitos",
+    "signingIn": "A entrar…",
+    "signedInAs": "Perfil:",
+    "errors": {
+      "wrongPin": "PIN errado. Estás a tentar fugir às multas?",
+      "rateLimited": "Demasiadas tentativas. Espera uns minutos e tenta outra vez.",
+      "network": "Não foi possível ligar ao servidor. Verifica a internet.",
+      "notConfigured": "A app ainda não está configurada: faltam as variáveis de ambiente do Supabase."
+    }
+  },
+  "home": {
+    "title": "Início",
+    "today": {
+      "title": "Hoje faz anos o {{name}}!"
+    },
+    "birthdays": {
+      "title": "Aniversários de {{month}}",
+      "none": "Ninguém faz anos este mês. Poupança nos bolos.",
+      "next": "Próximo:",
+      "nextValue_one": "{{name}}, {{date}} (amanhã)",
+      "nextValue_other": "{{name}}, {{date}} (daqui a {{count}} dias)"
+    },
+    "cakes": {
+      "title": "Bolos em falta",
+      "allGood": "Nenhum bolo em dívida. O balneário agradece."
+    },
+    "podium": {
+      "title": "Pódio das multas"
+    },
+    "dodgerJoke": "O jantar está à tua espera… e o tesoureiro também."
+  },
+  "birthdays": {
+    "title": "Aniversários",
+    "subtitle": "Bolos de {{start}} a {{end}}",
+    "shareReminder": "Lembrete",
+    "onlyPending": "Só pendentes",
+    "legend": "✅ Trouxe · 🎂 Esta semana · ⏳ Pendente · ⚠️ Em dívida · 📅 Sem data",
+    "empty": "Ainda não há membros na equipa.",
+    "noneInMonth": "Ninguém faz anos neste mês.",
+    "missingRows_one": "Falta gerar o calendário de bolos para {{count}} membro.",
+    "missingRows_other": "Falta gerar o calendário de bolos para {{count}} membros.",
+    "turns_one": "faz {{count}} ano",
+    "turns_other": "faz {{count}} anos",
+    "turnsOn_one": "faz {{count}} ano a {{date}}",
+    "turnsOn_other": "faz {{count}} anos a {{date}}",
+    "broughtOn": "Trouxe a {{date}}",
+    "alternativeOn": "Data alternativa: {{date}}",
+    "dueOn": "Bolo a {{date}}",
+    "waitingDate": "À espera de data alternativa",
+    "manage": "Gerir bolo de {{name}}",
+    "bornOn": "Nasceu a {{date}}",
+    "birthdayOn": "aniversário a {{date}}",
+    "cakeSection": "Bolo",
+    "markBrought": "Trouxe bolo",
+    "unmarkBrought": "Anular marcação",
+    "marked": "Bolo registado. Estava bom?",
+    "unmarked": "Marcação anulada.",
+    "broughtDate": "Data",
+    "alternativeDate": "Data alternativa",
+    "alternativeHintOut": "O aniversário é no verão, fora da janela dos bolos: escolhe o dia em que traz o bolo.",
+    "date": "Data",
+    "dateSaved": "Data do bolo guardada.",
+    "useBirthday": "Voltar à data de aniversário ({{date}})",
+    "notes": "Notas",
+    "notesSaved": "Notas guardadas.",
+    "status": {
+      "brought": "Trouxe",
+      "today": "Hoje",
+      "thisWeek": "Esta semana",
+      "pending": "Pendente",
+      "overdue": "Em dívida",
+      "noDate": "Sem data"
+    },
+    "outOfWindow": "Aniversários no verão",
+    "outOfWindowHint": "Fazem anos entre 1 de junho e 6 de setembro, fora da janela dos bolos: trazem bolo numa data alternativa.",
+    "alternativeHintInWindow": "Para trocar o dia do bolo (por exemplo, se calhar num dia sem treino).",
+    "generate": "Gerar calendário",
+    "generated_one": "Calendário atualizado: {{count}} alteração.",
+    "generated_other": "Calendário atualizado: {{count}} alterações."
+  },
+  "fines": {
+    "title": "Multas",
+    "fine": "Multa",
+    "count_one": "{{count}} multa",
+    "count_other": "{{count}} multas",
+    "paid": "Pagas",
+    "unpaid": "Por pagar",
+    "paidOn": "Paga a {{date}}",
+    "lockedBy": "Incluída no jantar de {{date}}",
+    "lockedHint": "O dinheiro desta multa já foi gasto no jantar, por isso não pode ser alterada.",
+    "open": "Abrir multa: {{description}}",
+    "occurredOn": "Aconteceu a {{date}}",
+    "paymentDate": "Data do pagamento",
+    "paymentMin": "A partir de {{date}} (depois do último jantar).",
+    "markPaid": "Marcar como paga",
+    "undoPayment": "Anular pagamento",
+    "adhoc": "Multa avulsa",
+    "payAll_one": "Marcar {{count}} multa como paga",
+    "payAll_other": "Marcar todas como pagas ({{count}})",
+    "payAllTitle": "Marcar todas como pagas",
+    "payAllMessage_one": "Marcar {{count}} multa de {{name}} como paga ({{amount}})?",
+    "payAllMessage_other": "Marcar as {{count}} multas de {{name}} como pagas ({{amount}})?",
+    "toast": {
+      "paid": "Paga! O jantar agradece.",
+      "unpaid": "Pagamento anulado.",
+      "updated": "Multa atualizada.",
+      "deleted": "Multa apagada.",
+      "allPaid_one": "{{count}} multa marcada como paga.",
+      "allPaid_other": "{{count}} multas marcadas como pagas."
+    },
+    "form": {
+      "descriptionPt": "Descrição (PT)",
+      "descriptionEn": "Descrição (EN)",
+      "amount": "Valor (€)",
+      "amountInvalid": "O valor tem de ser maior do que zero.",
+      "date": "Data",
+      "notes": "Notas",
+      "rule": "Regra",
+      "adhocPlaceholder": "Ex.: Chegar ao treino de chinelos",
+      "snapshotHint": "A descrição e o valor ficam guardados na multa: mudar o regulamento não altera multas antigas."
+    },
+    "confirmDelete": {
+      "title": "Apagar multa?",
+      "message": "Vais apagar a multa de {{name}}: {{description}} ({{amount}}). Não há volta a dar."
+    },
+    "totals": {
+      "total": "Total",
+      "paid": "Pago",
+      "unpaid": "Por pagar"
+    },
+    "filters": {
+      "status": "Estado",
+      "all": "Todas",
+      "more": "Filtros",
+      "member": "Membro",
+      "allMembers": "Todos os membros",
+      "category": "Categoria",
+      "allCategories": "Todas as categorias",
+      "from": "De",
+      "to": "Até",
+      "clear": "Limpar filtros"
+    },
+    "empty": {
+      "none": "Ainda não há multas.",
+      "noneText": "Um balneário exemplar… por enquanto.",
+      "filtered": "Nenhuma multa com estes filtros."
+    },
+    "assign": {
+      "cta": "Multa",
+      "title": "Atribuir multa",
+      "step": {
+        "members": "Quem foi?",
+        "rules": "O que fez?",
+        "confirm": "Confirma e guarda",
+        "done": "Feito"
+      },
+      "searchPlaceholder": "Pesquisar por nome, alcunha ou número",
+      "multi": "Vários membros",
+      "selectPlayers": "Selecionar todos os jogadores",
+      "selectStaff": "Selecionar equipa técnica",
+      "noMatch": "Ninguém com esse nome ou número.",
+      "continue_one": "Continuar ({{count}} membro)",
+      "continue_other": "Continuar ({{count}} membros)",
+      "noRules": "Nenhuma regra se aplica a todos os selecionados. Usa uma multa avulsa.",
+      "adhocCta": "Multa avulsa (sem regra)",
+      "multiTotal_one": "{{count}} multa · total {{total}}",
+      "multiTotal_other": "{{count}} multas · total {{total}}",
+      "save_one": "Guardar multa",
+      "save_other": "Guardar {{count}} multas",
+      "saved_one": "Multa guardada!",
+      "saved_other": "Multas guardadas!",
+      "shareQuestion": "Partilhar no grupo?",
+      "another": "Atribuir outra",
+      "viewFines": "Ver multas"
+    },
+    "subtitle": "Todas as multas da equipa",
+    "unpaidCount_one": "{{count}} multa por pagar",
+    "unpaidCount_other": "{{count}} multas por pagar"
+  },
+  "rankings": {
+    "title": "Rankings",
+    "tabs": {
+      "mostFined": "Mais multados",
+      "dodgers": "Caloteiros",
+      "reliable": "Mais cumpridores",
+      "cakes": "Bolos",
+      "stylish": "Estiloso"
+    },
+    "topDodger": "Caloteiro-mor",
+    "mostReliable": "Mais cumpridor",
+    "podium": "Pódio",
+    "dodgersJoke": "Cada euro por pagar é menos um prato no jantar.",
+    "paidCount_one": "{{count}} multa paga",
+    "paidCount_other": "{{count}} multas pagas",
+    "empty": {
+      "mostFined": "Ainda ninguém foi multado. Isto não vai durar.",
+      "dodgers": "Ninguém deve nada. Milagre!",
+      "reliable": "Ninguém tem as contas em dia. Vergonha!"
+    },
+    "subtitle": "Quem paga, quem foge e quem traz os melhores bolos"
+  },
+  "rules": {
+    "title": "Regulamento",
+    "subtitle": "O que custa cada asneira",
+    "manage": "Gerir regulamento",
+    "empty": "O regulamento está vazio. Anarquia total.",
+    "uncategorized": "Outras",
+    "onlyFor": "Só {{type}}",
+    "footer": "Todo o dinheiro das multas vai para os jantares de equipa. 🍽️"
+  },
+  "members": {
+    "new": "Novo membro",
+    "create": "Criar membro",
+    "notFound": "Membro não encontrado.",
+    "inactive": "Inativo",
+    "team": {
+      "title": "Equipa",
+      "subtitle": "{{players}} jogadores · {{staff}} na equipa técnica",
+      "empty": "Ainda não há ninguém na equipa."
+    },
+    "staffRole": {
+      "head_coach": "Treinador principal",
+      "assistant_coach": "Treinador adjunto",
+      "goalkeeper_coach": "Treinador de guarda-redes",
+      "fitness_coach": "Preparador físico",
+      "physio": "Fisioterapeuta",
+      "team_manager": "Delegado",
+      "other": "Outro"
+    },
+    "position": {
+      "goalkeeper": "Guarda-redes",
+      "defender": "Defesa",
+      "midfielder": "Médio",
+      "forward": "Avançado"
+    },
+    "fields": {
+      "type": "Tipo",
+      "name": "Nome",
+      "nickname": "Alcunha",
+      "birthDate": "Data de nascimento",
+      "birthDateHint": "O ano só é visível para o administrador.",
+      "shirtNumber": "Número",
+      "shirtInvalid": "Número inválido.",
+      "shirtDuplicate": "Atenção: já há um jogador ativo com este número.",
+      "position": "Posição",
+      "staffRole": "Função",
+      "active": "Ativo na equipa",
+      "activeHint": "Quem sai fica inativo: o histórico de multas e bolos mantém-se."
+    },
+    "detail": {
+      "money": "Contas",
+      "cake": "Bolo de aniversário",
+      "noCake": "Sem bolo registado no calendário.",
+      "fines": "Multas",
+      "noFines": "Sem multas. Um santo.",
+      "total": "Total de multas",
+      "paid": "Pago",
+      "unpaid": "Por pagar"
+    }
+  },
+  "awards": {
+    "title": "Prémios do bolo",
+    "adminSubtitle": "Os 3 melhores e os 3 piores bolos, decididos no balneário",
+    "best": "Melhores bolos",
+    "worst": "Bolos para esquecer",
+    "emptyPodium": "Ainda por decidir.",
+    "empty": "Ainda não há prémios do bolo.",
+    "emptyText": "O balneário ainda está a provar.",
+    "noBroughtCakes": "Ainda ninguém trouxe bolo.",
+    "emptySlot": "Tocar para escolher um bolo",
+    "comment": "Comentário",
+    "commentHint": "Com humor, sem ofender ninguém.",
+    "commentPlaceholder": "Ex.: Seco como a Ponta de São Lourenço em agosto",
+    "saveComment": "Guardar comentário",
+    "clearSlot": "Limpar lugar",
+    "searchCake": "Pesquisar bolo por nome",
+    "willSwap": "Troca com {{place}}",
+    "current": "Neste lugar",
+    "saved": "Pódio atualizado.",
+    "cleared": "Lugar limpo.",
+    "place": {
+      "best1": "🥇 Melhores bolos · 1.º lugar",
+      "best2": "🥈 Melhores bolos · 2.º lugar",
+      "best3": "🥉 Melhores bolos · 3.º lugar",
+      "worst1": "Bolos para esquecer · 1.º lugar",
+      "worst2": "Bolos para esquecer · 2.º lugar",
+      "worst3": "Bolos para esquecer · 3.º lugar"
+    }
+  },
+  "dinner": {
+    "title": "Jantares de equipa",
+    "subtitle": "Para onde vai o dinheiro das multas",
+    "explainer": "Todo o dinheiro das multas paga os jantares de equipa. O fundo conta os pagamentos recebidos depois do último jantar; o que faltar paga-se à parte.",
+    "card": {
+      "title": "Fundo do jantar",
+      "collectedPrefix": "Já temos",
+      "collectedSuffix": "para o jantar",
+      "pending": "Faltam cobrar",
+      "potential": "Se todos pagarem",
+      "since": "Pagamentos desde o último jantar ({{date}})."
+    },
+    "history": {
+      "title": "Jantares já feitos",
+      "empty": "Ainda não há jantares registados."
+    },
+    "admin": {
+      "title": "Registar jantar",
+      "subtitle": "Fecha o fundo quando o jantar acontecer",
+      "fundToClose": "Fundo que vai ser fechado",
+      "fundHint": "Pagamentos até à data do jantar (inclusive), desde o jantar anterior.",
+      "date": "Data do jantar",
+      "dateMin": "Tem de ser a partir de {{date}}.",
+      "place": "Local",
+      "notes": "Notas",
+      "register": "Registar jantar",
+      "confirmTitle": "Registar o jantar?",
+      "confirmMessage": "Os pagamentos até esta data ficam associados a este jantar e deixam de poder ser alterados.",
+      "confirmSummary": "Jantar a {{date}} · fundo de {{amount}}",
+      "registered": "Jantar registado com {{amount}}. Bom apetite!",
+      "registeredOn": "Jantar registado a {{date}}",
+      "immutableHint": "A data e o valor ficaram fechados. O local e as notas podem ser editados.",
+      "saved": "Jantar atualizado.",
+      "undo": "Anular registo do jantar",
+      "undoTitle": "Anular o registo do jantar?",
+      "undoMessage": "Os pagamentos deste jantar voltam a contar para o fundo atual e voltam a poder ser alterados.",
+      "undoTitle2": "Tens mesmo a certeza?",
+      "undoMessage2": "Isto apaga o registo do jantar de {{date}}. Usa só para corrigir enganos.",
+      "undoConfirm": "Sim, anular",
+      "undone": "Registo do jantar anulado.",
+      "latestTitle": "Último jantar"
+    }
+  },
+  "share": {
+    "button": "Partilhar",
+    "sheetTitle": "Partilhar no WhatsApp",
+    "copy": "Copiar texto",
+    "copied": "Copiado!",
+    "shareNow": "Partilhar",
+    "languageLabel": "Idioma da mensagem",
+    "preview": "Pré-visualização",
+    "hint": "Nada é enviado automaticamente: escolhes o grupo e carregas em enviar.",
+    "birthday": "🎂 *Hoje faz anos o {{name}}!* Parabéns, campeão! 🎉 Não te esqueças do bolo. 😏",
+    "fine": "💸 *Multa!* {{name}}: {{rule}} ({{amount}}). O jantar agradece. 🍽️",
+    "dinner": "🍽️ *Fundo do jantar:* {{fund}}. Ainda faltam cobrar {{unpaid}}. Paguem, que o jantar agradece! 😄",
+    "cakes": {
+      "title": "🍰 *Lembrete de bolos*",
+      "none": "Esta semana não há bolos nem dívidas. Que tristeza… 😢",
+      "week": "🎂 *Esta semana:*",
+      "weekLine": "• {{name}}, {{date}}",
+      "overdue": "⚠️ *Bolos em dívida:*",
+      "overdueLine": "• {{name}} (desde {{date}})",
+      "overdueLineNoDate": "• {{name}}",
+      "overdueJoke": "O balneário tem fome. 😤"
+    },
+    "rankings": {
+      "title": "🏆 *Rankings do balneário*",
+      "mostFined": "*Mais multados:*",
+      "noFines": "Ainda ninguém foi multado. Suspeito… 🤨",
+      "dodger": "🦹 *Caloteiro-mor:* {{name}} ({{amount}} por pagar)",
+      "noDodger": "🦹 *Caloteiro-mor:* ninguém! Milagre!",
+      "reliable": "😇 *Mais cumpridor:* {{name}} ({{amount}} pagos)",
+      "noReliable": "😇 *Mais cumpridor:* ninguém tem as contas em dia. Vergonha!"
+    },
+    "awards": {
+      "title": "🎂 *Prémios do bolo*",
+      "best": "*Melhores bolos* 🏅",
+      "worst": "*Bolos para esquecer* 🥴",
+      "empty": "(por decidir)",
+      "worstPlace1": "1.º",
+      "worstPlace2": "2.º",
+      "worstPlace3": "3.º"
+    },
+    "stylish": {
+      "title": "🕺 *O mais estiloso*",
+      "empty": "Ainda não há eleitos. O balneário está a avaliar. 👀",
+      "line": "{{month}}: *{{name}}*"
+    }
+  },
+  "admin": {
+    "title": "Administração",
+    "subtitle": "Só para quem tem o PIN de administrador",
+    "menu": {
+      "assignFine": {
+        "title": "Atribuir multa",
+        "text": "Em 3 toques, a um ou a vários membros"
+      },
+      "members": {
+        "title": "Membros",
+        "text": "Jogadores e equipa técnica, fotos incluídas"
+      },
+      "rules": {
+        "title": "Regulamento",
+        "text": "Regras, valores e traduções"
+      },
+      "awards": {
+        "title": "Prémios do bolo",
+        "text": "Os 3 melhores e os 3 piores"
+      },
+      "dinner": {
+        "title": "Registar jantar",
+        "text": "Fechar o fundo e ver o histórico"
+      },
+      "history": {
+        "title": "Histórico",
+        "text": "Tudo o que foi alterado, e por quem não interessa"
+      },
+      "backup": {
+        "title": "Backup e exportação",
+        "text": "Cópia completa e ficheiros JSON"
+      },
+      "cakeCalendar": {
+        "title": "Calendário de bolos",
+        "text": "Gerar o calendário e marcar quem trouxe bolo"
+      },
+      "stylish": {
+        "title": "O mais estiloso",
+        "text": "Eleger o melhor vestido do mês"
+      }
+    },
+    "members": {
+      "title": "Membros",
+      "subtitle": "Os membros nunca são apagados: quem sai fica inativo.",
+      "show": "Mostrar",
+      "active": "Ativos",
+      "inactive": "Inativos",
+      "noInactive": "Não há membros inativos.",
+      "noPhoto": "Sem foto",
+      "neverDeleted": "Para alguém sair da equipa, desativa-o na ficha. O histórico mantém-se.",
+      "saved": "Ficha guardada.",
+      "created": "Membro criado. Já podes adicionar a foto.",
+      "photoAfterCreate": "Depois de criar o membro podes adicionar a foto.",
+      "deactivateTitle": "Desativar membro?",
+      "deactivateMessage": "{{name}} deixa de aparecer na equipa e no calendário de bolos. As multas e o histórico mantêm-se.",
+      "deactivate": "Desativar"
+    },
+    "photo": {
+      "title": "Foto",
+      "camera": "Tirar foto",
+      "gallery": "Galeria",
+      "remove": "Remover foto",
+      "cropTitle": "Recortar foto",
+      "zoom": "Zoom",
+      "hint": "A foto é reduzida para 400×400 no telemóvel antes de ser enviada. O original nunca é guardado.",
+      "saved": "Foto atualizada.",
+      "removed": "Foto removida.",
+      "notImage": "Esse ficheiro não é uma imagem."
+    },
+    "rules": {
+      "title": "Gerir regulamento",
+      "subtitle": "Criar, editar, desativar e reordenar regras",
+      "new": "Nova regra",
+      "edit": "Editar regra",
+      "showInactive": "Mostrar regras desativadas",
+      "missingEnCount_one": "{{count}} regra sem tradução inglesa",
+      "missingEnCount_other": "{{count}} regras sem tradução inglesa",
+      "missingEn": "Sem EN",
+      "inactive": "Desativada",
+      "deactivate": "Desativar",
+      "activate": "Ativar",
+      "deactivated": "Regra desativada.",
+      "activated": "Regra ativada.",
+      "moveUp": "Subir",
+      "moveDown": "Descer",
+      "language": "Idioma do texto",
+      "required": "obrigatório",
+      "enHint": "Se deixares um campo em branco, aparece o texto em português.",
+      "saved": "Regra guardada.",
+      "snapshotHint": "Alterar o valor ou o título não muda as multas já atribuídas.",
+      "fields": {
+        "title": "Título",
+        "description": "Descrição",
+        "category": "Categoria",
+        "categoryHint": "Ex.: Treinos, Jogos, Balneário, Comportamento",
+        "amount": "Valor (€)",
+        "appliesTo": "Aplica-se a",
+        "active": "Regra ativa"
+      },
+      "appliesTo": {
+        "all": "Todos",
+        "player": "Jogadores",
+        "coach": "Treinadores",
+        "staff": "Staff"
+      }
+    },
+    "history": {
+      "title": "Histórico",
+      "subtitle": "Todas as alterações, registadas pela base de dados",
+      "filterTable": "Tipo",
+      "allTables": "Tudo",
+      "empty": "Nada registado com estes filtros.",
+      "unknownMember": "?",
+      "changes_one": "{{count}} alteração",
+      "changes_other": "{{count}} alterações",
+      "tables": {
+        "fines": "Multas",
+        "members": "Membros",
+        "fine_rules": "Regulamento",
+        "cakes": "Bolos",
+        "cake_awards": "Prémios do bolo",
+        "dinners": "Jantares",
+        "member_awards": "Mais estiloso"
+      },
+      "fields": {
+        "amount": "Valor",
+        "description": "Descrição (PT)",
+        "description_en": "Descrição (EN)",
+        "paid_at": "Paga a",
+        "occurred_on": "Data",
+        "notes": "Notas",
+        "member_id": "Membro",
+        "rule_id": "Regra",
+        "name": "Nome",
+        "nickname": "Alcunha",
+        "type": "Tipo",
+        "staff_role": "Função",
+        "shirt_number": "Número",
+        "position": "Posição",
+        "birth_date": "Nascimento",
+        "photo_path": "Foto",
+        "active": "Ativo",
+        "title": "Título (PT)",
+        "title_en": "Título (EN)",
+        "category": "Categoria (PT)",
+        "category_en": "Categoria (EN)",
+        "description_en_rule": "Descrição (EN)",
+        "applies_to": "Aplica-se a",
+        "sort_order": "Ordem",
+        "due_date": "Data do bolo",
+        "is_alternative_date": "Data alternativa",
+        "brought_on": "Trouxe a",
+        "kind": "Pódio",
+        "comment": "Comentário",
+        "cake_id": "Bolo",
+        "held_on": "Data do jantar",
+        "fund_amount": "Fundo do jantar",
+        "place": "Local"
+      },
+      "events": {
+        "fineCreated": "Multa a {{name}}: {{description}} ({{amount}})",
+        "fineDeleted": "Multa de {{name}} ({{amount}}) apagada",
+        "finePaid": "Multa de {{name}} ({{amount}}) marcada como paga",
+        "fineUnpaid": "Pagamento anulado: multa de {{name}} ({{amount}})",
+        "fineUpdated": "Multa de {{name}} ({{amount}}) editada",
+        "memberCreated": "Novo membro: {{name}}",
+        "memberDeleted": "Membro apagado: {{name}}",
+        "memberReactivated": "{{name}} voltou à equipa",
+        "memberDeactivated": "{{name}} saiu da equipa (inativo)",
+        "memberPhoto": "Foto de {{name}} alterada",
+        "memberUpdated": "Ficha de {{name}} editada",
+        "ruleCreated": "Nova regra: {{title}}",
+        "ruleDeleted": "Regra apagada: {{title}}",
+        "ruleReactivated": "Regra ativada: {{title}}",
+        "ruleDeactivated": "Regra desativada: {{title}}",
+        "ruleUpdated": "Regra editada: {{title}}",
+        "cakeCreated": "Bolo de {{name}} adicionado ao calendário",
+        "cakeDeleted": "Bolo de {{name}} removido do calendário",
+        "cakeBrought": "{{name}} trouxe bolo ({{date}})",
+        "cakeUnbrought": "Marcação do bolo de {{name}} anulada",
+        "cakeDateSet": "Data do bolo de {{name}}: {{date}}",
+        "cakeDateCleared": "Bolo de {{name}} ficou sem data",
+        "cakeUpdated": "Bolo de {{name}} editado",
+        "awardSet": "Prémio do bolo: {{name}} em {{place}}",
+        "awardCleared": "Prémio do bolo removido: {{name}} ({{place}})",
+        "stylishSet": "{{name}} eleito o mais estiloso de {{month}}",
+        "stylishUpdated": "Mais estiloso de {{month}} atualizado ({{name}})",
+        "stylishCleared": "Mais estiloso de {{month}} anulado",
+        "awardUpdated": "Comentário do prémio de {{name}} editado",
+        "dinnerRegistered": "Jantar registado a {{date}} ({{amount}})",
+        "dinnerUndone": "Registo do jantar de {{date}} anulado",
+        "dinnerUpdated": "Jantar de {{date}} editado"
+      }
+    },
+    "backup": {
+      "title": "Backup e exportação",
+      "subtitle": "Para guardar uma cópia ou repor em caso de erro",
+      "fullTitle": "Backup completo",
+      "fullText": "Um único ficheiro JSON com todas as tabelas (membros, regulamento, multas, bolos, prémios, jantares e histórico).",
+      "fullButton": "Descarregar backup",
+      "exportTitle": "Exportar dados",
+      "exportText": "Ficheiros JSON com valores em números e datas ISO (aaaa-mm-dd).",
+      "exportFines": "Multas ({{file}})",
+      "exportCakes": "Bolos ({{file}})",
+      "done": "Ficheiro descarregado.",
+      "restoreHint": "Para repor um backup, vê a secção \"Backup e reposição\" do README.",
+      "exportDinners": "Jantares ({{file}})"
+    }
+  },
+  "stylish": {
+    "title": "O mais estiloso",
+    "subtitle": "O melhor vestido do mês, decidido no balneário",
+    "adminSubtitle": "Escolhe o mais estiloso de cada mês",
+    "currentMonth": "Este mês",
+    "winner": "Mais estiloso de {{month}}",
+    "noWinner": "Ainda por decidir",
+    "currentWinner": "Eleito",
+    "empty": "Ainda não há eleitos.",
+    "emptyText": "O balneário ainda está a avaliar o guarda-roupa.",
+    "history": "Meses anteriores",
+    "pick": "Tocar para escolher",
+    "searchMember": "Pesquisar por nome",
+    "comment": "Comentário",
+    "commentHint": "Com humor, sem ofender ninguém.",
+    "commentPlaceholder": "Ex.: Chegou de fato e ténis, e safou-se",
+    "save": "Guardar",
+    "clear": "Limpar mês",
+    "saved": "Eleito atualizado.",
+    "cleared": "Mês limpo.",
+    "noActiveMembers": "Não há membros ativos para escolher."
+  }
+}

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <!-- Background and wording for the WhatsApp link preview. The crest is not
+       drawn here: scripts/generate-assets.mjs composites assets/crest.* on top
+       of the white panel below. -->
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b5bd3"/>
+      <stop offset="1" stop-color="#00347f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1080" cy="120" r="220" fill="#ffffff" opacity="0.06"/>
+  <circle cx="140" cy="560" r="180" fill="#ffffff" opacity="0.06"/>
+
+  <!-- White panel: the crest is drawn for white sheets, not for deep blue. -->
+  <rect x="70" y="105" width="420" height="420" rx="56" fill="#ffffff"/>
+
+  <text x="546" y="270" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="72" font-weight="bold" fill="#ffffff">Balneário</text>
+  <text x="546" y="350" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="72" font-weight="bold" fill="#ffffff">1º de Maio</text>
+  <text x="546" y="415" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="32" fill="#dbe7ff">Aniversários, bolos e multas</text>
+  <text x="546" y="465" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="26" fill="#9dc0ff">CD 1º de Maio · Desde 1925</text>
+  <text x="546" y="520" font-family="DejaVu Sans, Helvetica, Arial, sans-serif" font-size="40" fill="#ffffff">🎂  💸  🍽️</text>
+</svg>

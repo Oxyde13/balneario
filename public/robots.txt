@@ -1,0 +1,3 @@
+# Uso interno: nomes, datas de nascimento e multas. Não indexar.
+User-agent: *
+Disallow: /

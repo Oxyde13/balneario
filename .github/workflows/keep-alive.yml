@@ -1,0 +1,51 @@
+name: Keep Supabase awake
+
+# O plano gratuito do Supabase pausa projetos com pouca atividade durante 7 dias.
+# Este workflow faz uma query real à base de dados de 2 em 2 dias (e é o único
+# motivo pelo qual o projeto não adormece nas férias de verão).
+#
+# Secrets necessários (Settings → Secrets and variables → Actions):
+#   SUPABASE_URL       https://xxxx.supabase.co
+#   SUPABASE_ANON_KEY  anon/public key
+#   TEAM_EMAIL         email da conta de leitura (ex.: equipa@balneario.app)
+#   TEAM_PIN           PIN de 6 dígitos dessa conta
+on:
+  schedule:
+    - cron: '17 6 */2 * *' # às 06:17 UTC, de 2 em 2 dias
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Autenticar e ler a base de dados
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_ANON_KEY: ${{ secrets.SUPABASE_ANON_KEY }}
+          TEAM_EMAIL: ${{ secrets.TEAM_EMAIL }}
+          TEAM_PIN: ${{ secrets.TEAM_PIN }}
+        run: |
+          set -euo pipefail
+
+          # 1. Login com o perfil de equipa (só leitura). Sem login não se lê nada.
+          token=$(curl -sS -X POST \
+            "${SUPABASE_URL}/auth/v1/token?grant_type=password" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Content-Type: application/json" \
+            -d "{\"email\":\"${TEAM_EMAIL}\",\"password\":\"${TEAM_PIN}\"}" \
+            | sed -n 's/.*"access_token":"\([^"]*\)".*/\1/p')
+
+          if [ -z "$token" ]; then
+            echo "::error::Não foi possível autenticar (verifica TEAM_EMAIL/TEAM_PIN)."
+            exit 1
+          fi
+
+          # 2. Query real à base de dados.
+          status=$(curl -sS -o /tmp/keep-alive.json -w '%{http_code}' \
+            "${SUPABASE_URL}/rest/v1/keep_alive?select=id,note&limit=1" \
+            -H "apikey: ${SUPABASE_ANON_KEY}" \
+            -H "Authorization: Bearer ${token}")
+
+          echo "HTTP ${status}: $(cat /tmp/keep-alive.json)"
+          [ "$status" = "200" ] || { echo "::error::A query falhou."; exit 1; }
+          echo "Base de dados acordada. 👋"

@@ -1,0 +1,23 @@
+node_modules/
+dist/
+dist-ssr/
+*.local
+.env
+.env.*
+!.env.example
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.tsbuildinfo
+coverage/
+
+# Backend local de desenvolvimento
+scripts/dev-local/.jwt.secret
+scripts/dev-local/gateway.log
+
+# Dados pessoais do plantel (nomes e datas de nascimento reais).
+# O repositório é público: estes ficheiros ficam de fora de propósito.
+# Para os versionar, torna o repositório privado primeiro.
+data/
+supabase/squad.sql

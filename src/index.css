@@ -1,0 +1,88 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/*
+ * Club palette — CD 1º de Maio (blue & white).
+ * Values are "R G B" so Tailwind can apply opacity. Change the club colours here.
+ * NOTE: confirm the exact hex codes with the club (cd1demaio.pt); #0047AB is a
+ * placeholder strong blue.
+ */
+:root {
+  --primary: 0 71 171;            /* #0047AB */
+  --primary-foreground: 255 255 255;
+  --primary-soft: 229 237 250;
+  --link: 0 71 171;
+  --background: 243 246 251;
+  --foreground: 15 23 42;
+  --card: 255 255 255;
+  --card-foreground: 15 23 42;
+  --muted: 234 239 247;
+  --muted-foreground: 71 85 105;
+  --border: 213 221 233;
+  --success: 21 128 61;
+  --warning: 180 83 9;
+  --danger: 185 28 28;
+  --gold: 161 98 7;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: 37 99 235;
+    --primary-foreground: 255 255 255;
+    --primary-soft: 23 37 71;
+    --link: 147 187 255;
+    --background: 9 14 26;
+    --foreground: 226 232 240;
+    --card: 17 24 39;
+    --card-foreground: 226 232 240;
+    --muted: 30 41 59;
+    --muted-foreground: 163 177 198;
+    --border: 42 55 78;
+    --success: 74 222 128;
+    --warning: 251 191 36;
+    --danger: 248 113 113;
+    --gold: 250 204 21;
+    color-scheme: dark;
+  }
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    min-height: 100dvh;
+  }
+  input,
+  select,
+  textarea {
+    /* 16px avoids the iOS zoom on focus */
+    font-size: 16px;
+  }
+  :focus-visible {
+    outline: 2px solid rgb(var(--link));
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}

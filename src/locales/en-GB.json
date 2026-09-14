@@ -1,0 +1,699 @@
+{
+  "common": {
+    "appName": "Balneário 1º de Maio",
+    "appShortName": "Balneário",
+    "clubTagline": "CD 1º de Maio · Since 1925",
+    "skipToContent": "Skip to content",
+    "optional": "optional",
+    "yes": "Yes",
+    "no": "No",
+    "nav": {
+      "label": "Main navigation",
+      "home": "Home",
+      "birthdays": "Birthdays",
+      "fines": "Fines",
+      "rankings": "Rankings",
+      "rules": "Rule book",
+      "team": "Team",
+      "dinners": "Dinners",
+      "admin": "Admin",
+      "more": "More",
+      "logout": "Log out"
+    },
+    "actions": {
+      "seeAll": "See all",
+      "retry": "Try again",
+      "close": "Close",
+      "cancel": "Cancel",
+      "save": "Save",
+      "edit": "Edit",
+      "delete": "Delete",
+      "continue": "Continue",
+      "back": "Back",
+      "clear": "Clear",
+      "loadMore": "Load more"
+    },
+    "states": {
+      "loading": "Loading…",
+      "error": "Something went wrong."
+    },
+    "language": {
+      "label": "Language",
+      "pt": "Portuguese",
+      "en": "English"
+    },
+    "memberType": {
+      "player": "Player",
+      "coach": "Coach",
+      "staff": "Staff"
+    },
+    "memberTypePlural": {
+      "player": "Players",
+      "coach": "Coaches",
+      "staff": "Staff"
+    },
+    "filterType": {
+      "players": "Players",
+      "staff": "Coaching staff"
+    },
+    "dbErrors": {
+      "FINE_LOCKED": "This fine was paid and the money has already been spent on the dinner. It cannot be changed.",
+      "PAYMENT_BEFORE_DINNER": "The payment date must be after the last registered dinner.",
+      "DINNER_IMMUTABLE": "The dinner date and amount can no longer be changed.",
+      "DINNER_NOT_LATEST": "Only the most recent dinner can be undone.",
+      "DINNER_BEFORE_PREVIOUS": "The dinner must be after the previous one.",
+      "CAKE_HAS_AWARD": "This cake is on a podium. Take it off the awards first.",
+      "AWARD_CAKE_NOT_BROUGHT": "Only cakes that were actually brought can win an award.",
+      "AWARD_CAKE_NOT_FOUND": "Cake not found.",
+      "AWARD_MEMBER_INACTIVE": "Only active members can be given an award.",
+      "AWARD_MEMBER_NOT_FOUND": "Member not found.",
+      "MEMBER_DELETE_FORBIDDEN": "Members are never deleted. Mark them inactive instead.",
+      "NOT_ADMIN": "Only the admin can do this.",
+      "duplicate": "That record already exists.",
+      "forbidden": "You do not have permission for this.",
+      "network": "No connection. Check the internet and try again.",
+      "generic": "Something unexpected happened. Try again."
+    },
+    "notFound": {
+      "title": "Out of play!",
+      "text": "This page does not exist. Back to the pitch."
+    }
+  },
+  "auth": {
+    "subtitle": "Birthdays, cakes and fines of the squad",
+    "profile": {
+      "label": "Profile",
+      "team": "Team",
+      "admin": "Admin"
+    },
+    "pinLabel": "PIN",
+    "pinHint": "6 digits",
+    "signingIn": "Signing in…",
+    "signedInAs": "Profile:",
+    "errors": {
+      "wrongPin": "Wrong PIN. Trying to dodge your fines?",
+      "rateLimited": "Too many attempts. Wait a few minutes and try again.",
+      "network": "Could not reach the server. Check the internet.",
+      "notConfigured": "The app is not configured yet: the Supabase environment variables are missing."
+    }
+  },
+  "home": {
+    "title": "Home",
+    "today": {
+      "title": "It's {{name}}'s birthday today!"
+    },
+    "birthdays": {
+      "title": "{{month}} birthdays",
+      "none": "No birthdays this month. A cheap month for cakes.",
+      "next": "Next:",
+      "nextValue_one": "{{name}}, {{date}} (tomorrow)",
+      "nextValue_other": "{{name}}, {{date}} (in {{count}} days)"
+    },
+    "cakes": {
+      "title": "Cakes owed",
+      "allGood": "No cake owed. The dressing room thanks you."
+    },
+    "podium": {
+      "title": "Fines podium"
+    },
+    "dodgerJoke": "The dinner is waiting for you… and so is the treasurer."
+  },
+  "birthdays": {
+    "title": "Birthdays",
+    "subtitle": "Cakes from {{start}} to {{end}}",
+    "shareReminder": "Reminder",
+    "onlyPending": "Pending only",
+    "legend": "✅ Brought · 🎂 This week · ⏳ Pending · ⚠️ Overdue · 📅 No date",
+    "empty": "No members in the team yet.",
+    "noneInMonth": "No birthdays this month.",
+    "missingRows_one": "The cake calendar is missing for {{count}} member.",
+    "missingRows_other": "The cake calendar is missing for {{count}} members.",
+    "turns_one": "turns {{count}}",
+    "turns_other": "turns {{count}}",
+    "turnsOn_one": "turns {{count}} on {{date}}",
+    "turnsOn_other": "turns {{count}} on {{date}}",
+    "broughtOn": "Brought it on {{date}}",
+    "alternativeOn": "Alternative date: {{date}}",
+    "dueOn": "Cake due on {{date}}",
+    "waitingDate": "Waiting for an alternative date",
+    "manage": "Manage {{name}}'s cake",
+    "bornOn": "Born on {{date}}",
+    "birthdayOn": "birthday on {{date}}",
+    "cakeSection": "Cake",
+    "markBrought": "Brought the cake",
+    "unmarkBrought": "Undo this mark",
+    "marked": "Cake logged. Was it any good?",
+    "unmarked": "Mark removed.",
+    "broughtDate": "Date",
+    "alternativeDate": "Alternative date",
+    "alternativeHintOut": "The birthday falls in the summer, outside the cake window: pick the day the cake comes in.",
+    "date": "Date",
+    "dateSaved": "Cake date saved.",
+    "useBirthday": "Back to the birthday ({{date}})",
+    "notes": "Notes",
+    "notesSaved": "Notes saved.",
+    "status": {
+      "brought": "Brought",
+      "today": "Today",
+      "thisWeek": "This week",
+      "pending": "Pending",
+      "overdue": "Overdue",
+      "noDate": "No date"
+    },
+    "outOfWindow": "Summer birthdays",
+    "outOfWindowHint": "Birthdays between 1 June and 6 September fall outside the cake window: they bring the cake on another date.",
+    "alternativeHintInWindow": "To move the cake day (for example, if it falls on a day with no training).",
+    "generate": "Generate calendar",
+    "generated_one": "Calendar updated: {{count}} change.",
+    "generated_other": "Calendar updated: {{count}} changes."
+  },
+  "fines": {
+    "title": "Fines",
+    "fine": "Fine",
+    "count_one": "{{count}} fine",
+    "count_other": "{{count}} fines",
+    "paid": "Paid",
+    "unpaid": "Unpaid",
+    "paidOn": "Paid on {{date}}",
+    "lockedBy": "Included in the {{date}} dinner",
+    "lockedHint": "The money from this fine has already been spent on the dinner, so it cannot be changed.",
+    "open": "Open fine: {{description}}",
+    "occurredOn": "Happened on {{date}}",
+    "paymentDate": "Payment date",
+    "paymentMin": "From {{date}} onwards (after the last dinner).",
+    "markPaid": "Mark as paid",
+    "undoPayment": "Undo payment",
+    "adhoc": "One-off fine",
+    "payAll_one": "Mark {{count}} fine as paid",
+    "payAll_other": "Mark all as paid ({{count}})",
+    "payAllTitle": "Mark all as paid",
+    "payAllMessage_one": "Mark {{name}}'s {{count}} fine as paid ({{amount}})?",
+    "payAllMessage_other": "Mark all {{count}} fines from {{name}} as paid ({{amount}})?",
+    "toast": {
+      "paid": "Paid! The dinner says thanks.",
+      "unpaid": "Payment undone.",
+      "updated": "Fine updated.",
+      "deleted": "Fine deleted.",
+      "allPaid_one": "{{count}} fine marked as paid.",
+      "allPaid_other": "{{count}} fines marked as paid."
+    },
+    "form": {
+      "descriptionPt": "Description (PT)",
+      "descriptionEn": "Description (EN)",
+      "amount": "Amount (€)",
+      "amountInvalid": "The amount must be greater than zero.",
+      "date": "Date",
+      "notes": "Notes",
+      "rule": "Rule",
+      "adhocPlaceholder": "E.g. Turned up to training in flip-flops",
+      "snapshotHint": "The description and amount are stored on the fine: changing the rule book never changes old fines."
+    },
+    "confirmDelete": {
+      "title": "Delete this fine?",
+      "message": "You are about to delete {{name}}'s fine: {{description}} ({{amount}}). There is no undo."
+    },
+    "totals": {
+      "total": "Total",
+      "paid": "Paid",
+      "unpaid": "Unpaid"
+    },
+    "filters": {
+      "status": "Status",
+      "all": "All",
+      "more": "Filters",
+      "member": "Member",
+      "allMembers": "Everyone",
+      "category": "Category",
+      "allCategories": "All categories",
+      "from": "From",
+      "to": "To",
+      "clear": "Clear filters"
+    },
+    "empty": {
+      "none": "No fines yet.",
+      "noneText": "A model dressing room… so far.",
+      "filtered": "No fines match these filters."
+    },
+    "assign": {
+      "cta": "Fine",
+      "title": "New fine",
+      "step": {
+        "members": "Who was it?",
+        "rules": "What did they do?",
+        "confirm": "Check and save",
+        "done": "Done"
+      },
+      "searchPlaceholder": "Search by name, nickname or number",
+      "multi": "Several members",
+      "selectPlayers": "Select all players",
+      "selectStaff": "Select coaching staff",
+      "noMatch": "Nobody with that name or number.",
+      "continue_one": "Continue ({{count}} member)",
+      "continue_other": "Continue ({{count}} members)",
+      "noRules": "No rule applies to everyone selected. Use a one-off fine.",
+      "adhocCta": "One-off fine (no rule)",
+      "multiTotal_one": "{{count}} fine · {{total}} in total",
+      "multiTotal_other": "{{count}} fines · {{total}} in total",
+      "save_one": "Save fine",
+      "save_other": "Save {{count}} fines",
+      "saved_one": "Fine saved!",
+      "saved_other": "Fines saved!",
+      "shareQuestion": "Share it in the group?",
+      "another": "Add another",
+      "viewFines": "View fines"
+    },
+    "subtitle": "Every fine in the team",
+    "unpaidCount_one": "{{count}} fine unpaid",
+    "unpaidCount_other": "{{count}} fines unpaid"
+  },
+  "rankings": {
+    "title": "Rankings",
+    "tabs": {
+      "mostFined": "Most fined",
+      "dodgers": "Dodgers",
+      "reliable": "Most reliable",
+      "cakes": "Cakes",
+      "stylish": "Stylish"
+    },
+    "topDodger": "Top Dodger",
+    "mostReliable": "Most Reliable Payer",
+    "podium": "Podium",
+    "dodgersJoke": "Every unpaid euro is one less plate at dinner.",
+    "paidCount_one": "{{count}} fine paid",
+    "paidCount_other": "{{count}} fines paid",
+    "empty": {
+      "mostFined": "No fines yet. That won't last.",
+      "dodgers": "Nobody owes a cent. It's a miracle!",
+      "reliable": "Nobody's all paid up. Shameful!"
+    },
+    "subtitle": "Who pays, who dodges and who brings the best cakes"
+  },
+  "rules": {
+    "title": "Rule book",
+    "subtitle": "What each slip-up costs",
+    "manage": "Manage rule book",
+    "empty": "The rule book is empty. Total anarchy.",
+    "uncategorized": "Other",
+    "onlyFor": "{{type}} only",
+    "footer": "Every euro from fines goes to the team dinners. 🍽️"
+  },
+  "members": {
+    "new": "New member",
+    "create": "Create member",
+    "notFound": "Member not found.",
+    "inactive": "Inactive",
+    "team": {
+      "title": "Team",
+      "subtitle": "{{players}} players · {{staff}} in the coaching staff",
+      "empty": "Nobody in the team yet."
+    },
+    "staffRole": {
+      "head_coach": "Head coach",
+      "assistant_coach": "Assistant coach",
+      "goalkeeper_coach": "Goalkeeper coach",
+      "fitness_coach": "Fitness coach",
+      "physio": "Physio",
+      "team_manager": "Team manager",
+      "other": "Other"
+    },
+    "position": {
+      "goalkeeper": "Goalkeeper",
+      "defender": "Defender",
+      "midfielder": "Midfielder",
+      "forward": "Forward"
+    },
+    "fields": {
+      "type": "Type",
+      "name": "Name",
+      "nickname": "Nickname",
+      "birthDate": "Date of birth",
+      "birthDateHint": "Only the admin sees the year.",
+      "shirtNumber": "Number",
+      "shirtInvalid": "Invalid number.",
+      "shirtDuplicate": "Careful: another active player already has this number.",
+      "position": "Position",
+      "staffRole": "Role",
+      "active": "Active in the team",
+      "activeHint": "People who leave become inactive: their fines and cakes stay in the history."
+    },
+    "detail": {
+      "money": "Accounts",
+      "cake": "Birthday cake",
+      "noCake": "No cake in the calendar yet.",
+      "fines": "Fines",
+      "noFines": "No fines. A saint.",
+      "total": "Fines total",
+      "paid": "Paid",
+      "unpaid": "Unpaid"
+    }
+  },
+  "awards": {
+    "title": "Cake awards",
+    "adminSubtitle": "The 3 best and the 3 worst cakes, decided in the dressing room",
+    "best": "Best cakes",
+    "worst": "Cakes to forget",
+    "emptyPodium": "Still to be decided.",
+    "empty": "No cake awards yet.",
+    "emptyText": "The dressing room is still tasting.",
+    "noBroughtCakes": "Nobody has brought a cake yet.",
+    "emptySlot": "Tap to pick a cake",
+    "comment": "Comment",
+    "commentHint": "Keep it funny, never offensive.",
+    "commentPlaceholder": "E.g. As dry as Ponta de São Lourenço in August",
+    "saveComment": "Save comment",
+    "clearSlot": "Clear place",
+    "searchCake": "Search cake by name",
+    "willSwap": "Swaps with {{place}}",
+    "current": "In this place",
+    "saved": "Podium updated.",
+    "cleared": "Place cleared.",
+    "place": {
+      "best1": "🥇 Best cakes · 1st place",
+      "best2": "🥈 Best cakes · 2nd place",
+      "best3": "🥉 Best cakes · 3rd place",
+      "worst1": "Cakes to forget · 1st place",
+      "worst2": "Cakes to forget · 2nd place",
+      "worst3": "Cakes to forget · 3rd place"
+    }
+  },
+  "dinner": {
+    "title": "Team dinners",
+    "subtitle": "Where the fine money goes",
+    "explainer": "Every euro from fines pays for the team dinners. The fund counts payments received since the last dinner; anything missing is settled separately.",
+    "card": {
+      "title": "Dinner fund",
+      "collectedPrefix": "We've got",
+      "collectedSuffix": "for the dinner",
+      "pending": "Still to collect",
+      "potential": "If everyone pays",
+      "since": "Payments since the last dinner ({{date}})."
+    },
+    "history": {
+      "title": "Dinners so far",
+      "empty": "No dinners registered yet."
+    },
+    "admin": {
+      "title": "Register dinner",
+      "subtitle": "Close the fund once the dinner has happened",
+      "fundToClose": "Fund about to be closed",
+      "fundHint": "Payments up to and including the dinner date, since the previous dinner.",
+      "date": "Dinner date",
+      "dateMin": "Must be {{date}} or later.",
+      "place": "Place",
+      "notes": "Notes",
+      "register": "Register dinner",
+      "confirmTitle": "Register the dinner?",
+      "confirmMessage": "Payments up to this date become part of this dinner and can no longer be changed.",
+      "confirmSummary": "Dinner on {{date}} · fund of {{amount}}",
+      "registered": "Dinner registered with {{amount}}. Enjoy!",
+      "registeredOn": "Dinner registered on {{date}}",
+      "immutableHint": "The date and amount are now closed. Place and notes can still be edited.",
+      "saved": "Dinner updated.",
+      "undo": "Undo the dinner registration",
+      "undoTitle": "Undo the dinner registration?",
+      "undoMessage": "The payments from this dinner go back into the current fund and can be changed again.",
+      "undoTitle2": "Are you absolutely sure?",
+      "undoMessage2": "This erases the record of the {{date}} dinner. Only use it to fix mistakes.",
+      "undoConfirm": "Yes, undo it",
+      "undone": "Dinner registration undone.",
+      "latestTitle": "Latest dinner"
+    }
+  },
+  "share": {
+    "button": "Share",
+    "sheetTitle": "Share on WhatsApp",
+    "copy": "Copy text",
+    "copied": "Copied!",
+    "shareNow": "Share",
+    "languageLabel": "Message language",
+    "preview": "Preview",
+    "hint": "Nothing is sent automatically: you pick the group and hit send.",
+    "birthday": "🎂 *It's {{name}}'s birthday today!* Happy birthday, champ! 🎉 Don't forget the cake. 😏",
+    "fine": "💸 *Fine!* {{name}}: {{rule}} ({{amount}}). The team dinner says thanks. 🍽️",
+    "dinner": "🍽️ *Dinner fund:* {{fund}}. Still {{unpaid}} to collect. Pay up, the dinner is counting on you! 😄",
+    "cakes": {
+      "title": "🍰 *Cake reminder*",
+      "none": "No cakes due and nobody behind this week. How sad… 😢",
+      "week": "🎂 *This week:*",
+      "weekLine": "• {{name}}, {{date}}",
+      "overdue": "⚠️ *Cakes overdue:*",
+      "overdueLine": "• {{name}} (since {{date}})",
+      "overdueLineNoDate": "• {{name}}",
+      "overdueJoke": "The dressing room is starving. 😤"
+    },
+    "rankings": {
+      "title": "🏆 *Dressing room rankings*",
+      "mostFined": "*Most fined:*",
+      "noFines": "Nobody has been fined yet. Suspicious… 🤨",
+      "dodger": "🦹 *Top Dodger:* {{name}} ({{amount}} unpaid)",
+      "noDodger": "🦹 *Top Dodger:* nobody! It's a miracle!",
+      "reliable": "😇 *Most Reliable Payer:* {{name}} ({{amount}} paid)",
+      "noReliable": "😇 *Most Reliable Payer:* nobody's all paid up. Shameful!"
+    },
+    "awards": {
+      "title": "🎂 *Cake awards*",
+      "best": "*Best cakes* 🏅",
+      "worst": "*Cakes to forget* 🥴",
+      "empty": "(to be decided)",
+      "worstPlace1": "1st",
+      "worstPlace2": "2nd",
+      "worstPlace3": "3rd"
+    },
+    "stylish": {
+      "title": "🕺 *The most stylish*",
+      "empty": "No winners yet. The dressing room is still judging. 👀",
+      "line": "{{month}}: *{{name}}*"
+    }
+  },
+  "admin": {
+    "title": "Admin",
+    "subtitle": "Only for whoever has the admin PIN",
+    "menu": {
+      "assignFine": {
+        "title": "New fine",
+        "text": "Three taps, one or many members"
+      },
+      "members": {
+        "title": "Members",
+        "text": "Players and coaching staff, photos included"
+      },
+      "rules": {
+        "title": "Rule book",
+        "text": "Rules, amounts and translations"
+      },
+      "awards": {
+        "title": "Cake awards",
+        "text": "The 3 best and the 3 worst"
+      },
+      "dinner": {
+        "title": "Register dinner",
+        "text": "Close the fund and see the history"
+      },
+      "history": {
+        "title": "History",
+        "text": "Everything that changed, and when"
+      },
+      "backup": {
+        "title": "Backup and export",
+        "text": "Full copy and JSON files"
+      },
+      "cakeCalendar": {
+        "title": "Cake calendar",
+        "text": "Generate the calendar and log who brought cake"
+      },
+      "stylish": {
+        "title": "The most stylish",
+        "text": "Pick the best dressed of the month"
+      }
+    },
+    "members": {
+      "title": "Members",
+      "subtitle": "Members are never deleted: whoever leaves becomes inactive.",
+      "show": "Show",
+      "active": "Active",
+      "inactive": "Inactive",
+      "noInactive": "No inactive members.",
+      "noPhoto": "No photo",
+      "neverDeleted": "To take someone out of the team, mark them inactive in their profile. The history stays.",
+      "saved": "Profile saved.",
+      "created": "Member created. You can add the photo now.",
+      "photoAfterCreate": "Once the member is created you can add the photo.",
+      "deactivateTitle": "Make this member inactive?",
+      "deactivateMessage": "{{name}} stops showing up in the team and in the cake calendar. Fines and history are kept.",
+      "deactivate": "Make inactive"
+    },
+    "photo": {
+      "title": "Photo",
+      "camera": "Take photo",
+      "gallery": "Gallery",
+      "remove": "Remove photo",
+      "cropTitle": "Crop photo",
+      "zoom": "Zoom",
+      "hint": "The photo is resized to 400×400 on your phone before it is uploaded. The original is never stored.",
+      "saved": "Photo updated.",
+      "removed": "Photo removed.",
+      "notImage": "That file is not an image."
+    },
+    "rules": {
+      "title": "Manage rule book",
+      "subtitle": "Create, edit, deactivate and reorder rules",
+      "new": "New rule",
+      "edit": "Edit rule",
+      "showInactive": "Show deactivated rules",
+      "missingEnCount_one": "{{count}} rule without an English translation",
+      "missingEnCount_other": "{{count}} rules without an English translation",
+      "missingEn": "No EN",
+      "inactive": "Deactivated",
+      "deactivate": "Deactivate",
+      "activate": "Activate",
+      "deactivated": "Rule deactivated.",
+      "activated": "Rule activated.",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "language": "Text language",
+      "required": "required",
+      "enHint": "Leave a field blank and the Portuguese text is shown instead.",
+      "saved": "Rule saved.",
+      "snapshotHint": "Changing the amount or the title never changes fines that were already given.",
+      "fields": {
+        "title": "Title",
+        "description": "Description",
+        "category": "Category",
+        "categoryHint": "E.g. Training, Matches, Dressing room, Behaviour",
+        "amount": "Amount (€)",
+        "appliesTo": "Applies to",
+        "active": "Rule active"
+      },
+      "appliesTo": {
+        "all": "Everyone",
+        "player": "Players",
+        "coach": "Coaches",
+        "staff": "Staff"
+      }
+    },
+    "history": {
+      "title": "History",
+      "subtitle": "Every change, recorded by the database",
+      "filterTable": "Type",
+      "allTables": "Everything",
+      "empty": "Nothing recorded with these filters.",
+      "unknownMember": "?",
+      "changes_one": "{{count}} change",
+      "changes_other": "{{count}} changes",
+      "tables": {
+        "fines": "Fines",
+        "members": "Members",
+        "fine_rules": "Rule book",
+        "cakes": "Cakes",
+        "cake_awards": "Cake awards",
+        "dinners": "Dinners",
+        "member_awards": "Most stylish"
+      },
+      "fields": {
+        "amount": "Amount",
+        "description": "Description (PT)",
+        "description_en": "Description (EN)",
+        "paid_at": "Paid on",
+        "occurred_on": "Date",
+        "notes": "Notes",
+        "member_id": "Member",
+        "rule_id": "Rule",
+        "name": "Name",
+        "nickname": "Nickname",
+        "type": "Type",
+        "staff_role": "Role",
+        "shirt_number": "Number",
+        "position": "Position",
+        "birth_date": "Date of birth",
+        "photo_path": "Photo",
+        "active": "Active",
+        "title": "Title (PT)",
+        "title_en": "Title (EN)",
+        "category": "Category (PT)",
+        "category_en": "Category (EN)",
+        "description_en_rule": "Description (EN)",
+        "applies_to": "Applies to",
+        "sort_order": "Order",
+        "due_date": "Cake date",
+        "is_alternative_date": "Alternative date",
+        "brought_on": "Brought on",
+        "kind": "Podium",
+        "comment": "Comment",
+        "cake_id": "Cake",
+        "held_on": "Dinner date",
+        "fund_amount": "Dinner fund",
+        "place": "Place"
+      },
+      "events": {
+        "fineCreated": "Fine for {{name}}: {{description}} ({{amount}})",
+        "fineDeleted": "{{name}}'s fine ({{amount}}) deleted",
+        "finePaid": "{{name}}'s fine ({{amount}}) marked as paid",
+        "fineUnpaid": "Payment undone: {{name}}'s fine ({{amount}})",
+        "fineUpdated": "{{name}}'s fine ({{amount}}) edited",
+        "memberCreated": "New member: {{name}}",
+        "memberDeleted": "Member deleted: {{name}}",
+        "memberReactivated": "{{name}} is back in the team",
+        "memberDeactivated": "{{name}} left the team (inactive)",
+        "memberPhoto": "{{name}}'s photo changed",
+        "memberUpdated": "{{name}}'s profile edited",
+        "ruleCreated": "New rule: {{title}}",
+        "ruleDeleted": "Rule deleted: {{title}}",
+        "ruleReactivated": "Rule activated: {{title}}",
+        "ruleDeactivated": "Rule deactivated: {{title}}",
+        "ruleUpdated": "Rule edited: {{title}}",
+        "cakeCreated": "{{name}}'s cake added to the calendar",
+        "cakeDeleted": "{{name}}'s cake removed from the calendar",
+        "cakeBrought": "{{name}} brought the cake ({{date}})",
+        "cakeUnbrought": "{{name}}'s cake mark undone",
+        "cakeDateSet": "{{name}}'s cake date: {{date}}",
+        "cakeDateCleared": "{{name}}'s cake is now without a date",
+        "cakeUpdated": "{{name}}'s cake edited",
+        "awardSet": "Cake award: {{name}} in {{place}}",
+        "awardCleared": "Cake award removed: {{name}} ({{place}})",
+        "stylishSet": "{{name}} named most stylish of {{month}}",
+        "stylishUpdated": "Most stylish of {{month}} updated ({{name}})",
+        "stylishCleared": "Most stylish of {{month}} cleared",
+        "awardUpdated": "Comment on {{name}}'s award edited",
+        "dinnerRegistered": "Dinner registered on {{date}} ({{amount}})",
+        "dinnerUndone": "Record of the {{date}} dinner undone",
+        "dinnerUpdated": "{{date}} dinner edited"
+      }
+    },
+    "backup": {
+      "title": "Backup and export",
+      "subtitle": "To keep a copy or restore after a mistake",
+      "fullTitle": "Full backup",
+      "fullText": "A single JSON file with every table (members, rule book, fines, cakes, awards, dinners and history).",
+      "fullButton": "Download backup",
+      "exportTitle": "Export data",
+      "exportText": "JSON files with numeric amounts and ISO dates (yyyy-mm-dd).",
+      "exportFines": "Fines ({{file}})",
+      "exportCakes": "Cakes ({{file}})",
+      "done": "File downloaded.",
+      "restoreHint": "To restore a backup, see the \"Backup e reposição\" section of the README.",
+      "exportDinners": "Dinners ({{file}})"
+    }
+  },
+  "stylish": {
+    "title": "The most stylish",
+    "subtitle": "Best dressed of the month, decided in the dressing room",
+    "adminSubtitle": "Pick the most stylish of each month",
+    "currentMonth": "This month",
+    "winner": "Most stylish of {{month}}",
+    "noWinner": "Still to be decided",
+    "currentWinner": "Winner",
+    "empty": "No winners yet.",
+    "emptyText": "The dressing room is still judging the wardrobe.",
+    "history": "Previous months",
+    "pick": "Tap to choose",
+    "searchMember": "Search by name",
+    "comment": "Comment",
+    "commentHint": "Keep it funny, not hurtful.",
+    "commentPlaceholder": "e.g. Turned up in a suit and trainers, and got away with it",
+    "save": "Save",
+    "clear": "Clear month",
+    "saved": "Winner updated.",
+    "cleared": "Month cleared.",
+    "noActiveMembers": "There are no active members to choose from."
+  }
+}
