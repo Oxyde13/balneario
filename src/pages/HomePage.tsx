@@ -15,9 +15,9 @@ import { StylishView } from '../components/StylishView';
 import { Card, EmptyState, ErrorState, Skeleton, Stat, buttonClass } from '../components/ui';
 import { ChevronRightIcon, PlusIcon } from '../components/icons';
 import { birthdayInYear, nextBirthday, turningAge } from '../lib/birthdays';
-import { daysBetween, formatMonthYear, todayISO } from '../lib/dates';
+import { daysBetween, todayISO } from '../lib/dates';
 import { shortName } from '../lib/members';
-import { awardsMessage, birthdayMessage, cakesReminderMessage, dinnerMessage, stylishMessage } from '../lib/shareTexts';
+import { awardsMessage, birthdayMessage, dinnerMessage, monthBirthdaysMessage, monthCakesMessage, stylishMessage } from '../lib/shareTexts';
 
 export function HomePage() {
   const { t } = useTranslation();
@@ -37,7 +37,7 @@ export function HomePage() {
       <TodayBirthdays />
       <div className="grid gap-4 md:grid-cols-2">
         <MonthBirthdaysCard />
-        <CakesCard />
+        <MonthCakesCard />
         <TopDodgerCard />
         <FinesPodiumCard />
         <DinnerFundCard />
@@ -119,10 +119,15 @@ function MonthBirthdaysCard() {
   }, [members, month, year, today]);
 
   const cakeByMember = new Map(cakes.map((c) => [c.member_id, c]));
+  const share = monthBirthdaysMessage(
+    thisMonth.map(({ member, date }) => ({ name: shortName(member), date, age: turningAge(member.birth_date, date) })),
+  );
 
   return (
     <Card>
-      <CardTitle to="/birthdays">🎉 {t('home:birthdays.title', { month: fmt.month(month - 1) })}</CardTitle>
+      <CardTitle to="/birthdays" action={thisMonth.length > 0 ? <ShareButton build={share} iconOnly /> : undefined}>
+        🎉 {t('home:birthdays.title', { month: fmt.month(month - 1) })}
+      </CardTitle>
       {error ? (
         <ErrorState error={error} onRetry={() => void refetch()} />
       ) : isLoading ? (
@@ -160,41 +165,57 @@ function MonthBirthdaysCard() {
   );
 }
 
-function CakesCard() {
+/**
+ * Cake days of the current month, by cake date — not by birthday. The two are
+ * different questions: whose party it is, and when there is actually cake.
+ * Cakes already brought stay on the list, marked, so the month reads as a record.
+ */
+function MonthCakesCard() {
   const { t } = useTranslation();
   const fmt = useFormat();
   const { rows, isLoading, error, refetch } = useCakeRows();
+  const today = todayISO();
+  const month = today.slice(0, 7);
 
-  const week = rows
-    .filter((r) => r.status === 'today' || r.status === 'thisWeek')
+  const cakes = rows
+    .filter((row) => row.dueDate?.startsWith(month))
     .sort((a, b) => (a.dueDate ?? '').localeCompare(b.dueDate ?? ''));
-  const overdue = rows.filter((r) => r.status === 'overdue').sort((a, b) => (a.dueDate ?? '').localeCompare(b.dueDate ?? ''));
-  const noDate = rows.filter((r) => r.status === 'noDate');
 
-  const share = cakesReminderMessage(
-    week.map((r) => ({ name: shortName(r.member), date: r.dueDate })),
-    overdue.map((r) => ({ name: shortName(r.member), date: r.dueDate })),
+  const share = monthCakesMessage(
+    cakes.map((row) => ({
+      name: shortName(row.member),
+      dueDate: row.dueDate!,
+      birthday: row.isAlternative ? row.member.birth_date : null,
+      brought: Boolean(row.broughtOn),
+    })),
   );
 
   return (
     <Card>
-      <CardTitle to="/birthdays" action={<ShareButton build={share} iconOnly />}>
-        🍰 {t('home:cakes.title')}
+      <CardTitle to="/birthdays" action={cakes.length > 0 ? <ShareButton build={share} iconOnly /> : undefined}>
+        🍰 {t('home:cakes.title', { month: fmt.month(Number(today.slice(5, 7)) - 1) })}
       </CardTitle>
       {error ? (
         <ErrorState error={error} onRetry={refetch} />
       ) : isLoading ? (
         <Skeleton className="h-24" />
-      ) : week.length + overdue.length + noDate.length === 0 ? (
-        <p className="text-sm text-muted-foreground">{t('home:cakes.allGood')}</p>
+      ) : cakes.length === 0 ? (
+        <p className="text-sm text-muted-foreground">{t('home:cakes.none')}</p>
       ) : (
         <ul className="space-y-2">
-          {[...week, ...overdue, ...noDate].map((row) => (
+          {cakes.map((row) => (
             <li key={row.member.id}>
               <MemberLine
                 member={row.member}
                 size="sm"
-                subtitle={row.dueDate ? fmt.date(row.dueDate) : t('birthdays:waitingDate')}
+                subtitle={
+                  // An agreed date says nothing about the birthday, so show both.
+                  // Not row.birthday: that is null when the birthday falls outside
+                  // the cake window, which is the very case that needs an agreed date.
+                  row.isAlternative
+                    ? `${fmt.dayMonth(row.dueDate!)} · ${t('birthdays:birthdayOn', { date: fmt.dayMonth(row.member.birth_date) })}`
+                    : fmt.dayMonth(row.dueDate!)
+                }
                 trailing={<CakeStatusBadge status={row.status} />}
               />
             </li>
@@ -330,7 +351,6 @@ function AwardsCard() {
 /** The three most recent monthly winners; hidden until there is at least one. */
 function StylishCard() {
   const { t } = useTranslation();
-  const fmt = useFormat();
   const { data: awards = [] } = useMemberAwards();
   const { data: members = [] } = useMembers();
   if (awards.length === 0) return null;
@@ -339,7 +359,7 @@ function StylishCard() {
   const share = stylishMessage(
     awards.map((a) => {
       const member = memberMap.get(a.member_id);
-      return { month: formatMonthYear(a.period_start, fmt.lng), name: member ? shortName(member) : '—', comment: a.comment };
+      return { periodStart: a.period_start, name: member ? shortName(member) : '—', comment: a.comment };
     }),
   );
 

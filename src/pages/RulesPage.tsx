@@ -62,7 +62,8 @@ export function RulesPage() {
       ) : groups.length === 0 ? (
         <EmptyState emoji="📜" title={t('rules:empty')} />
       ) : (
-        groups.map(([category, rules]) => (
+        <div className="space-y-7">
+          {groups.map(([category, rules]) => (
           <section key={category}>
             <SectionTitle>{category}</SectionTitle>
             <ul className="space-y-2">
@@ -85,7 +86,8 @@ export function RulesPage() {
               })}
             </ul>
           </section>
-        ))
+          ))}
+        </div>
       )}
       <p className="mt-6 text-center text-sm italic text-muted-foreground">{t('rules:footer')}</p>
     </div>

@@ -36,10 +36,10 @@ export function TeamPage() {
       ) : squad.players.length + squad.staff.length === 0 ? (
         <EmptyState emoji="👻" title={t('members:team.empty')} />
       ) : (
-        <>
+        <div className="space-y-7">
           <SquadSection title={t('common:filterType.players')} members={squad.players} />
           <SquadSection title={t('common:filterType.staff')} members={squad.staff} />
-        </>
+        </div>
       )}
     </div>
   );

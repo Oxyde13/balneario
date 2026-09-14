@@ -72,7 +72,11 @@ export function Sheet({
           </IconButton>
         </div>
         <div className="flex-1 overflow-y-auto px-4 py-4">{children}</div>
-        {footer && <div className="pb-safe border-t border-border px-4 py-3">{footer}</div>}
+        {/* The safe-area inset adds to the padding instead of replacing it:
+            `pb-safe` would set padding-bottom to 0 wherever there is no notch. */}
+        {footer && (
+          <div className="border-t border-border px-4 pt-3 pb-[calc(0.75rem_+_env(safe-area-inset-bottom))]">{footer}</div>
+        )}
       </div>
     </div>,
     document.body,

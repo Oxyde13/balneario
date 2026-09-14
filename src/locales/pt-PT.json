@@ -110,8 +110,8 @@
       "nextValue_other": "{{name}}, {{date}} (daqui a {{count}} dias)"
     },
     "cakes": {
-      "title": "Bolos em falta",
-      "allGood": "Nenhum bolo em dívida. O balneário agradece."
+      "title": "Bolos de {{month}}",
+      "none": "Não há bolos marcados este mês."
     },
     "podium": {
       "title": "Pódio das multas"
@@ -440,6 +440,18 @@
       "overdueLine": "• {{name}} (desde {{date}})",
       "overdueLineNoDate": "• {{name}}",
       "overdueJoke": "O balneário tem fome. 😤"
+    },
+    "monthBirthdays": {
+      "title": "🎉 *Aniversários de {{month}}*",
+      "none": "Ninguém faz anos este mês. Poupança nos bolos. 😌",
+      "line": "• {{name}} — {{date}} (faz {{age}})"
+    },
+    "monthCakes": {
+      "title": "🍰 *Bolos de {{month}}*",
+      "none": "Não há bolos marcados este mês. 😢",
+      "line": "• {{date}} — *{{name}}*",
+      "lineAgreed": "• {{date}} — *{{name}}* (aniversário a {{birthday}})",
+      "brought": "✅"
     },
     "rankings": {
       "title": "🏆 *Rankings do balneário*",

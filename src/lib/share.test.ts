@@ -3,7 +3,17 @@ import { describe, expect, it } from 'vitest';
 /** Intl uses non-breaking spaces around the euro sign; normalise them for comparisons. */
 const plain = (text: string) => text.replace(/\s/g, ' ');
 import { composeShareText, whatsappUrl } from './share';
-import { awardsMessage, birthdayMessage, cakesReminderMessage, dinnerMessage, fineMessage, rankingsMessage, stylishMessage } from './shareTexts';
+import {
+  awardsMessage,
+  birthdayMessage,
+  cakesReminderMessage,
+  dinnerMessage,
+  fineMessage,
+  monthBirthdaysMessage,
+  monthCakesMessage,
+  rankingsMessage,
+  stylishMessage,
+} from './shareTexts';
 
 const APP = 'https://balneario.example';
 
@@ -118,8 +128,8 @@ describe('whatsappUrl', () => {
 describe('most stylish message', () => {
   it('lists the winners, newest first, with the comment in italics', () => {
     const build = stylishMessage([
-      { month: 'Setembro de 2026', name: 'Gouveia', comment: 'Fato e ténis.' },
-      { month: 'Agosto de 2026', name: 'Rubinho', comment: null },
+      { periodStart: '2026-09-01', name: 'Gouveia', comment: 'Fato e ténis.' },
+      { periodStart: '2026-08-01', name: 'Rubinho', comment: null },
     ]);
     const text = build('pt-PT');
     expect(text).toContain('🕺 *O mais estiloso*');
@@ -130,9 +140,46 @@ describe('most stylish message', () => {
     expect(text.indexOf('Setembro')).toBeLessThan(text.indexOf('Agosto'));
   });
 
+  it('spells the month in the language of each message', () => {
+    const build = stylishMessage([{ periodStart: '2026-09-01', name: 'Gouveia', comment: null }]);
+    expect(build('pt-PT')).toContain('Setembro de 2026: *Gouveia*');
+    expect(build('en-GB')).toContain('September 2026: *Gouveia*');
+  });
+
   it('says so when nothing has been decided yet', () => {
     const build = stylishMessage([]);
     expect(build('pt-PT')).toContain('Ainda não há eleitos');
     expect(build('en-GB')).toContain('No winners yet');
+  });
+});
+
+describe('month cards', () => {
+  it('writes the birthdays of the month with the age', () => {
+    const build = monthBirthdaysMessage([
+      { name: 'Rubinho', date: '2026-09-08', age: 31 },
+      { name: 'Gouveia', date: '2026-09-10', age: 30 },
+    ]);
+    expect(build('pt-PT')).toContain('🎉 *Aniversários de Setembro de 2026*');
+    expect(build('pt-PT')).toContain('• Rubinho — 8 de setembro (faz 31)');
+    expect(build('en-GB')).toContain('🎉 *Birthdays in September 2026*');
+    expect(build('en-GB')).toContain('• Rubinho — 8 September (turns 31)');
+  });
+
+  it('writes the cake days by date, marking agreed dates and cakes already brought', () => {
+    const build = monthCakesMessage([
+      { name: 'Rubinho', dueDate: '2026-09-08', birthday: null, brought: true },
+      { name: 'Cipriano', dueDate: '2026-09-26', birthday: '1992-09-01', brought: false },
+    ]);
+    const pt = build('pt-PT');
+    expect(pt).toContain('🍰 *Bolos de Setembro de 2026*');
+    expect(pt).toContain('• 8 de setembro — *Rubinho* ✅');
+    // Agreed date: the birthday is a different day and is spelled out.
+    expect(pt).toContain('• 26 de setembro — *Cipriano* (aniversário a 1 de setembro)');
+    expect(build('en-GB')).toContain('• 26 September — *Cipriano* (birthday on 1 September)');
+  });
+
+  it('says so when the month is empty', () => {
+    expect(monthCakesMessage([])('pt-PT')).toContain('Não há bolos marcados este mês');
+    expect(monthBirthdaysMessage([])('en-GB')).toContain('Nobody has a birthday this month');
   });
 });

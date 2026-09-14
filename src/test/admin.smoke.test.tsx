@@ -38,14 +38,37 @@ describe('dashboard', () => {
     expect(text).toContain('Pódio das multas');
   });
 
-  it('shows the September birthdays and the cakes still owed', async () => {
+  it('shows the September birthdays', async () => {
     const view = await open('/');
     const text = view.text();
     expect(text).toContain('Aniversários de Setembro');
     expect(text).toContain('Rúben Teixeira');
     expect(text).toContain('faz 31 anos');
-    expect(text).toContain('Bolos em falta');
-    expect(text).toContain('Sem data'); // Chinedu, born 15 July
+  });
+
+  it('lists the cake days of the month by cake date, not by birthday', async () => {
+    const view = await open('/');
+    const text = view.text().replace(/\s/g, ' ');
+    expect(text).toContain('Bolos de Setembro');
+    // Agreed date: shows the cake day AND the birthday, which are different days.
+    expect(text).toContain('26 de setembro · aniversário a 1 de setembro');
+    // Cakes already brought stay on the list for the month.
+    expect(text).toContain('Trouxe');
+    // November is another month: not here.
+    expect(text).not.toContain('14 de novembro ·');
+  });
+
+  it('orders the cake days by date', async () => {
+    const view = await open('/');
+    // Scoped to the cakes card: the birthdays card above repeats some of these days.
+    const heading = [...view.container.querySelectorAll('h2')].find((h) => h.textContent?.includes('Bolos de'));
+    const card = heading?.closest('div.rounded-2xl');
+    const dias = [...(card?.querySelectorAll('li') ?? [])].map((li) => li.textContent?.replace(/\s/g, ' ') ?? '');
+    expect(dias).toHaveLength(4);
+    expect(dias[0]).toContain('8 de setembro');
+    expect(dias[1]).toContain('9 de setembro');
+    expect(dias[2]).toContain('10 de setembro');
+    expect(dias[3]).toContain('26 de setembro');
   });
 
   it('shows the cake awards, with a marker on every podium place', async () => {

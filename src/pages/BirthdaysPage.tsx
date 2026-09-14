@@ -78,30 +78,35 @@ export function BirthdaysPage() {
       ) : rows.length === 0 ? (
         <EmptyState emoji="🎈" title={t('birthdays:empty')} />
       ) : (
-        groups.map((group) => {
-          if (group.rows.length === 0 && (onlyPending || group.key !== 'out')) {
-            return onlyPending ? null : (
+        // SectionTitle carries `first:mt-0`, and each title is the first child of
+        // its own <section>, so its top margin never applies here: the spacing
+        // between months has to come from this wrapper.
+        <div className="space-y-7">
+          {groups.map((group) => {
+            if (group.rows.length === 0 && (onlyPending || group.key !== 'out')) {
+              return onlyPending ? null : (
+                <section key={group.key}>
+                  <SectionTitle>{group.title}</SectionTitle>
+                  <p className="px-1 py-1 text-sm text-muted-foreground">{t('birthdays:noneInMonth')}</p>
+                </section>
+              );
+            }
+            if (group.rows.length === 0) return null;
+            return (
               <section key={group.key}>
                 <SectionTitle>{group.title}</SectionTitle>
-                <p className="px-1 text-sm text-muted-foreground">{t('birthdays:noneInMonth')}</p>
+                {group.key === 'out' && <p className="mb-2 px-1 text-sm text-muted-foreground">{t('birthdays:outOfWindowHint')}</p>}
+                <ul className="space-y-2">
+                  {group.rows.map((row) => (
+                    <li key={row.member.id}>
+                      <BirthdayItem row={row} today={today} onEdit={isAdmin ? () => setEditing(row) : undefined} />
+                    </li>
+                  ))}
+                </ul>
               </section>
             );
-          }
-          if (group.rows.length === 0) return null;
-          return (
-            <section key={group.key}>
-              <SectionTitle>{group.title}</SectionTitle>
-              {group.key === 'out' && <p className="mb-2 px-1 text-sm text-muted-foreground">{t('birthdays:outOfWindowHint')}</p>}
-              <ul className="space-y-2">
-                {group.rows.map((row) => (
-                  <li key={row.member.id}>
-                    <BirthdayItem row={row} today={today} onEdit={isAdmin ? () => setEditing(row) : undefined} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          );
-        })
+          })}
+        </div>
       )}
 
       {editing && <CakeSheet row={editing} window={window} onClose={() => setEditing(null)} />}

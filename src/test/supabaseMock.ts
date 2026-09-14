@@ -36,6 +36,9 @@ export const members: Member[] = [
   member({ id: 'm5', name: 'Carlos Nóbrega', nickname: 'Mister', type: 'coach', staff_role: 'head_coach', birth_date: '1978-08-22' }),
   member({ id: 'm6', name: 'Hélder Andrade', type: 'coach', staff_role: 'assistant_coach', birth_date: '1985-11-14' }),
   member({ id: 'm7', name: 'Zé Antigo', birth_date: '1990-03-03', active: false }),
+  // Birthday just before the cake window opens (7 Sep), so it needs an agreed
+  // date: the cake is set for later in the same month and is not brought yet.
+  member({ id: 'm8', name: 'Nuno Camacho', shirt_number: 14, position: 'defender', birth_date: '1992-09-01' }),
 ];
 
 export const rules: FineRule[] = [
@@ -74,6 +77,7 @@ export const cakes: Cake[] = [
   { id: 'c4', member_id: 'm4', due_date: '2026-09-10', is_alternative_date: false, brought_on: '2026-09-10', notes: null },
   { id: 'c5', member_id: 'm5', due_date: '2026-09-09', is_alternative_date: true, brought_on: '2026-09-09', notes: null },
   { id: 'c6', member_id: 'm6', due_date: '2026-11-14', is_alternative_date: false, brought_on: null, notes: null },
+  { id: 'c7', member_id: 'm8', due_date: '2026-09-26', is_alternative_date: true, brought_on: null, notes: null },
 ];
 
 export const awards: CakeAward[] = [

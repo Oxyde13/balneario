@@ -10,7 +10,6 @@ import { TypeBadge } from '../components/MemberBits';
 import { Podium } from '../components/Podium';
 import { ShareButton } from '../components/ShareButton';
 import { Card, EmptyState, ErrorState, ListSkeleton, PageHeader, Tabs, cn } from '../components/ui';
-import { formatMonthYear } from '../lib/dates';
 import { shortName } from '../lib/members';
 import { awardsMessage, rankingsMessage, stylishMessage } from '../lib/shareTexts';
 import type { FineStat } from '../types/db';
@@ -83,7 +82,7 @@ export function RankingsPage() {
     (stylish.data ?? []).map((a) => {
       const member = memberMap.get(a.member_id);
       return {
-        month: formatMonthYear(a.period_start, fmt.lng),
+        periodStart: a.period_start,
         name: member ? shortName(member) : '—',
         comment: a.comment,
       };

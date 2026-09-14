@@ -110,8 +110,8 @@
       "nextValue_other": "{{name}}, {{date}} (in {{count}} days)"
     },
     "cakes": {
-      "title": "Cakes owed",
-      "allGood": "No cake owed. The dressing room thanks you."
+      "title": "Cakes in {{month}}",
+      "none": "No cakes scheduled this month."
     },
     "podium": {
       "title": "Fines podium"
@@ -440,6 +440,18 @@
       "overdueLine": "• {{name}} (since {{date}})",
       "overdueLineNoDate": "• {{name}}",
       "overdueJoke": "The dressing room is starving. 😤"
+    },
+    "monthBirthdays": {
+      "title": "🎉 *Birthdays in {{month}}*",
+      "none": "Nobody has a birthday this month. Money saved on cake. 😌",
+      "line": "• {{name}} — {{date}} (turns {{age}})"
+    },
+    "monthCakes": {
+      "title": "🍰 *Cakes in {{month}}*",
+      "none": "No cakes scheduled this month. 😢",
+      "line": "• {{date}} — *{{name}}*",
+      "lineAgreed": "• {{date}} — *{{name}}* (birthday on {{birthday}})",
+      "brought": "✅"
     },
     "rankings": {
       "title": "🏆 *Dressing room rankings*",

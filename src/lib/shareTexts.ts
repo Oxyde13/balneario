@@ -1,5 +1,5 @@
 import i18n from './i18n';
-import { formatDate, formatDayMonth } from './dates';
+import { formatDate, formatDayMonth, formatMonthYear } from './dates';
 import { formatMoney } from './money';
 import { localized } from './localized';
 import type { Language } from './language';
@@ -50,6 +50,54 @@ export function cakesReminderMessage(week: CakeReminderItem[], overdue: CakeRemi
       );
       lines.push('', t('cakes.overdueJoke'));
     }
+    return lines.join('\n');
+  };
+}
+
+export interface MonthBirthdayEntry {
+  name: string;
+  date: string;
+  age: number;
+}
+
+/** Everyone with a birthday in the given month. */
+export function monthBirthdaysMessage(entries: MonthBirthdayEntry[]) {
+  return (lng: Language) => {
+    const t = tFor(lng);
+    if (entries.length === 0) return `${t('monthBirthdays.title')}\n\n${t('monthBirthdays.none')}`;
+    const month = formatMonthYear(entries[0].date, lng);
+    const lines = [t('monthBirthdays.title', { month }), ''];
+    entries.forEach((e) =>
+      lines.push(t('monthBirthdays.line', { name: e.name, date: formatDayMonth(e.date, lng), age: e.age })),
+    );
+    return lines.join('\n');
+  };
+}
+
+export interface MonthCakeEntry {
+  name: string;
+  dueDate: string;
+  /** Set when the date was agreed instead of being the birthday. */
+  birthday: string | null;
+  brought: boolean;
+}
+
+/** Cake days of the given month, by cake date. */
+export function monthCakesMessage(entries: MonthCakeEntry[]) {
+  return (lng: Language) => {
+    const t = tFor(lng);
+    if (entries.length === 0) return `${t('monthCakes.title')}\n\n${t('monthCakes.none')}`;
+    const month = formatMonthYear(entries[0].dueDate, lng);
+    const lines = [t('monthCakes.title', { month }), ''];
+    entries.forEach((e) => {
+      const key = e.birthday ? 'monthCakes.lineAgreed' : 'monthCakes.line';
+      const line = t(key, {
+        name: e.name,
+        date: formatDayMonth(e.dueDate, lng),
+        birthday: e.birthday ? formatDayMonth(e.birthday, lng) : '',
+      });
+      lines.push(e.brought ? `${line} ${t('monthCakes.brought')}` : line);
+    });
     return lines.join('\n');
   };
 }
@@ -126,7 +174,8 @@ export function awardsMessage(awards: AwardShareEntry[]) {
 }
 
 export interface StylishShareEntry {
-  month: string;
+  /** Raw period start: the month is spelled in the language of each message. */
+  periodStart: string;
   name: string;
   comment: string | null;
 }
@@ -141,7 +190,7 @@ export function stylishMessage(entries: StylishShareEntry[]) {
       return lines.join('\n');
     }
     entries.forEach((e) => {
-      const line = t('stylish.line', { month: e.month, name: e.name });
+      const line = t('stylish.line', { month: formatMonthYear(e.periodStart, lng), name: e.name });
       lines.push(e.comment ? `${line} — _${e.comment}_` : line);
     });
     return lines.join('\n');

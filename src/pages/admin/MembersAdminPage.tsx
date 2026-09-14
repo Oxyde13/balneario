@@ -53,7 +53,8 @@ export default function MembersAdminPage() {
       ) : squad.players.length + squad.staff.length === 0 ? (
         <EmptyState emoji="👻" title={show === 'active' ? t('members:team.empty') : t('admin:members.noInactive')} />
       ) : (
-        (['players', 'staff'] as const).map((group) =>
+        <div className="space-y-7">
+          {(['players', 'staff'] as const).map((group) =>
           squad[group].length === 0 ? null : (
             <section key={group}>
               <SectionTitle>{t(`common:filterType.${group}`)}</SectionTitle>
@@ -72,7 +73,8 @@ export default function MembersAdminPage() {
               </ul>
             </section>
           ),
-        )
+          )}
+        </div>
       )}
       <p className="mt-6 text-center text-sm text-muted-foreground">{t('admin:members.neverDeleted')}</p>
     </div>

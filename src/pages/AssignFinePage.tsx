@@ -195,7 +195,8 @@ export default function AssignFinePage() {
           ) : squad.players.length + squad.staff.length === 0 ? (
             <EmptyState emoji="🔍" title={t('fines:assign.noMatch')} />
           ) : (
-            (['players', 'staff'] as const).map((group) =>
+            <div className="space-y-7">
+              {(['players', 'staff'] as const).map((group) =>
               squad[group].length === 0 ? null : (
                 <section key={group}>
                   <SectionTitle>{t(`common:filterType.${group}`)}</SectionTitle>
@@ -226,11 +227,12 @@ export default function AssignFinePage() {
                   </ul>
                 </section>
               ),
-            )
+              )}
+            </div>
           )}
 
           {multi && (
-            <div className="pb-safe fixed inset-x-0 bottom-[64px] z-30 border-t border-border bg-card/95 p-3 backdrop-blur md:bottom-0 md:left-64">
+            <div className="fixed inset-x-0 bottom-[64px] z-30 border-t border-border bg-card/95 p-3 pb-[calc(0.75rem_+_env(safe-area-inset-bottom))] backdrop-blur md:bottom-0 md:left-64">
               <Button block size="lg" disabled={selected.length === 0} onClick={() => setStep('rules')}>
                 {t('fines:assign.continue', { count: selected.length })}
               </Button>
@@ -249,7 +251,8 @@ export default function AssignFinePage() {
           ) : (
             <>
               {ruleGroups.length === 0 && <EmptyState emoji="📜" title={t('fines:assign.noRules')} />}
-              {ruleGroups.map(([category, list]) => (
+              <div className="space-y-7">
+                {ruleGroups.map(([category, list]) => (
                 <section key={category}>
                   <SectionTitle>{category}</SectionTitle>
                   <ul className="grid gap-2 sm:grid-cols-2">
@@ -267,7 +270,8 @@ export default function AssignFinePage() {
                     ))}
                   </ul>
                 </section>
-              ))}
+                ))}
+              </div>
               <SectionTitle>{t('fines:adhoc')}</SectionTitle>
               <button
                 type="button"
