@@ -1,0 +1,18 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "balneario",
+  "compatibility_date": "2026-09-14",
+
+  // Static site, no Worker script: Cloudflare serves the built files directly.
+  // `single-page-application` is what makes /fines, /team/… and friends resolve
+  // to index.html. It replaces the `/* /index.html 200` line that Pages needed
+  // in public/_redirects — kept together, the two loop and the deploy is
+  // refused with "Infinite loop detected in this rule".
+  // public/_headers still applies, and carries the noindex.
+  "assets": {
+    "directory": "./dist",
+    "not_found_handling": "single-page-application"
+  },
+
+  "observability": { "enabled": true }
+}

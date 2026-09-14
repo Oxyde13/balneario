@@ -220,9 +220,14 @@ Primeiros passos dentro da app (com o PIN de administrador):
 
 Site estático: o `dist/` serve-se em qualquer lado. Já vão incluídos os ficheiros de configuração:
 
-- **Cloudflare Pages:** build `npm run build`, output `dist` (usa `public/_headers` e `public/_redirects`)
+- **Cloudflare Workers** (o que está em uso): `wrangler.jsonc` — build `npm run build`, output `dist`.
+  O encaminhamento das rotas da SPA vem de `assets.not_found_handling`, **não** de um `_redirects`:
+  as duas coisas juntas fazem o deploy falhar com *"Infinite loop detected in this rule"*.
+  O `public/_headers` continua a aplicar-se e é ele que traz o `noindex`.
 - **Netlify:** `netlify.toml`
 - **Vercel:** `vercel.json`
+- **Cloudflare Pages** (caminho antigo): precisa de um `public/_redirects` com `/*  /index.html  200`,
+  que foi removido por ser incompatível com os Workers.
 
 Em qualquer plataforma, define as variáveis `VITE_*` nas **environment variables** do projeto
 (têm de estar presentes no momento do build) e confirma que o header **`X-Robots-Tag: noindex`**
